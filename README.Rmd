@@ -1,0 +1,164 @@
+
+# EXERCICE STAT CAN
+
+## preambule
+
+Merci pour cette opportunité d'avoir pu jouer avec les données que vous avez proposées
+en exercice et j'ai répondu au maximum avec mes connaissances. Comme je 
+vous l'ai fait savoir dans ma lettre d'introduction, je travaille depuis 2 ans à 
+la création d'un package R pour nettoyer, harmoniser et visualiser des données 
+(de patients pour des études en épidémiologie). Ce package est toujours en cours 
+de création, mais j'ai saisi la chance de travailler avec mon projet sur vos données.
+Les résultats et fonctions reposent beaucoup sur mon travail personnel existant. 
+
+J'ai adapté mon package et je vous ai créé pour l'occasion un petit package 
+(tinyPackage) qui ramasse les fonctions que j'ai utilisées dans l'exercice. D'autre part, 
+je fonctionne avec un autre package qui est d'avantage ma boite à outils personnelle (fabR).
+Je vous ai fourni un endroit (git public) ou vous pourrez télécharger les deux packages. 
+En cas d'impossibilité, je vous ai fourni les fonctions que vous pouvez sourcer ici
+au besoin. L'annexe N. 6 vous présente d'avantage les possibilités du package dans
+le contexte de vos données.
+
+Les codes reposent sur beaucoup de dépendances, si vous avez le moindre problème,
+les inputs et les outputs ont été générés localement.
+
+Bonne lecture.
+
+## IMPORT DES LIBRAIRIES ET FONCTIONS
+
+```{r, echo = FALSE}
+
+# rm(list = ls())
+source("0_functions.R")
+sessionInfo()
+
+```
+
+
+**fonction download_online_data()** 
+- Cette fonction interagit avec l'usager.e afin 
+d'automatiser le chargement de fichiers zip dans un dossier, et leur extraction.
+
+**shape_key_file()**
+- Transformation du key file pour le rendre interpretable plus facilement.
+La structure étant déterminée pour un key file, on peut le brasser pour obtenir
+un format plus facile à interpreter.
+
+**add_variables_valueType()**
+- Ajout des meta-données provenant du dataset au data dictionary.
+
+**add_variables_valueType()**
+- Pour assurer la consistance des données et préserver le datatype et les NA values,
+le choix a été fait de remplacer 'blank' dans tout l'exercice par -77.
+
+
+### TACHE 1 - TELECHARGEMENT DES DONNEES
+
+**remarque**
+les fichiers sont placés dans *input_files*
+
+```{r}
+source("1_telecharger_les_donnees.R")
+
+```
+
+### TACHE 2 - CREATION DE LA MISE EN CORRESPONDANCE
+
+**remarque**
+Je m'appuie sur une structure de données avec laquelle j'ai l'habitude de travailler.
+Elle repose sur la création d'un dictionnaire de données à partir du fichier de clés
+(key file). Ce dictionnaire est ensuite utilisé tout au long de l'exercice. La structure 
+est compatible avec SPSS, ainsi que le package que j'ai développé.
+
+```{r}
+source("2_creer_la_mise_en_correspondance.R")
+
+print(dataset)
+print(data_dict_tache2)
+
+
+```
+
+### TACHE 3 - EXTRAIRE ET FUSIONNER LES DONNEES.
+
+**remarque**
+Je me suis assuré que les données dans le dataset sont compatibles avec le data dictionary.
+Quand cela n'est pas le cas, j'ai justifié mes choix. Notamment : Les NA ont été
+remplacés par -77 pour assurer la pertinence des valeurs manquantes ('Not Applicable'
+se differencie d'une donnée simplement non fournie). Donc la variable **VOLUNTARY_PT**
+ne peut pas être boolean à ce moment-là. Elle a donc été re-castée en 'text'.
+
+
+```{r}
+source("3_extraire_et_fusionner_les_donnees.R")
+
+# verifications Quarter
+annotated_dataset_tache3 %>%
+  group_by(QUARTER,SURVMNTH) %>%
+  tally
+
+# verifications Vontary PT
+annotated_dataset_tache3 %>%
+  group_by(VOLUNTARY_PT,WHYPT) %>%
+  tally
+
+```
+
+### TACHE 4 - SUIVI DE L'OBJECTIF 8.
+
+**remarque**
+À l'aide du data dictionary et du datataset, j'ai extrait les informations pour répondre
+aux questions 1, 2 et 3. Néanmoins, je souhaitais inclure le poids final, mais je 
+n'était pas certain s'il s'agissait là d'un pondérateur ou non. Je ne l'ai pas utilisé.
+
+
+```{r}
+source("4_suivi_objectif_8.R")
+
+print(tx_chom)
+print(tx_etud_prov)
+print(rank_5_industry_VPT)
+
+```
+
+
+### TACHE 5 - SUIVI DE L'OBJECTIF 5.
+
+**remarque**
+Je me suis inspiré des indicateurs que nous avions déjà pour le suivi de l'objectif 8
+et j'ai utilisé la variable de la tache 3 **VOLUNTARY_PT** pour créer deux indicateurs.
+L'un met en lumière qu'il n'y a que peu de différences au global entre les individus
+qui déclarent être en temps partiel volontairement ou non. Mais il y a de grandes 
+disparités quand on regarde pourquoi en utilisant la variable source **WHYPT**. 
+Avec un facteur allant de 2 a 10, les femmes semblent davantage exposées à être en 
+temps partiel involontaire pour des raisons familiales ou pour leurs enfants.
+
+
+```{r}
+source("5_suivi_objectif_5.R")
+
+print(tx_difference_hm_VPT)
+print(tx_difference_hm_WHYPT)
+
+```
+
+
+
+### ANNEXE 6 - POSSIBILITE D'ADAPTER LE PACKAGE A STAT CAN.
+
+**remarque**
+j'ai adapté le code du package pour répondre à la structure des données de
+Stat Can. Les rendus peuvent manquer de finesse, mais le code fonctionne. 
+Je vous ai produit un tableau Excel de sommaire de chaque variable ainsi qu'un 
+dossier (bookdown) qui est un rapport visuel par variable.
+
+
+```{r}
+source("6_annexe.R")
+
+# open_visual_report("output_files/ANNEXE_6/report")
+# open_visual_report("output_files/ANNEXE_6/report_BY_QUARTER/")
+
+```
+
+
