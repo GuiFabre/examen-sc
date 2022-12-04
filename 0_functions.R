@@ -4,12 +4,10 @@
 if(TRUE){
   devtools::install_github(
     repo = "https://github.com/guifabre/tinyPackage",
-    auth_token = "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",
     force = TRUE)
   
   devtools::install_github(
     repo = "https://github.com/guifabre/fabR",
-    auth_token = "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",
     force = TRUE)
 }else{
   
