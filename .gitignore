@@ -1,3 +1,5 @@
 .Rproj.user
 .Rhistory
 *.Rproj
+input_files/
+output_files/
