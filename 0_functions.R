@@ -33,19 +33,19 @@ if(TRUE){
   library(ggplot2)
   library(haven)
   
-  source("package_source/package_source_fabR/00-lazy.R")
-  source("package_source/package_source_fabR/01-functions_template.R")
-  source("package_source/package_source_fabR/02-file_index.R")
-  source("package_source/package_source_fabR/03-dates.R")
-  source("package_source/package_source_fabR/04-viz.R")
-  source("package_source/package_source_fabR/05-check_table_values.R")
+  source("package_source_bkp/package_source_fabR/00-lazy.R")
+  source("package_source_bkp/package_source_fabR/01-functions_template.R")
+  source("package_source_bkp/package_source_fabR/02-file_index.R")
+  source("package_source_bkp/package_source_fabR/03-dates.R")
+  source("package_source_bkp/package_source_fabR/04-viz.R")
+  source("package_source_bkp/package_source_fabR/05-check_table_values.R")
   
-  file.edit("package_source/package_source_tinyPackage/00-utils.R")
-  source("package_source/package_source_tinyPackage/03-dictionaries_functions.R")
-  source("package_source/package_source_tinyPackage/04-data_QA.R")
-  source("package_source/package_source_tinyPackage/05-summary_functions.R")
-  source("package_source/package_source_tinyPackage/06-visualize.R")
-  source("package_source/package_source_tinyPackage/08-catalogue_functions.R")
+  source("package_source_bkp/package_source_tinyPackage/00-utils.R")
+  source("package_source_bkp/package_source_tinyPackage/03-dictionaries_functions.R")
+  source("package_source_bkp/package_source_tinyPackage/04-data_QA.R")
+  source("package_source_bkp/package_source_tinyPackage/05-summary_functions.R")
+  source("package_source_bkp/package_source_tinyPackage/06-visualize.R")
+  source("package_source_bkp/package_source_tinyPackage/08-catalogue_functions.R")
   }
 
 # si cela ne fonctionne pas:
