@@ -21,13 +21,13 @@ write_excel_allsheets(report_tache4,"output_files/ANNEXE_6/summary.xlsx")
 # cliquer sur index.html , ce qui ouvrira un navigateur internet. (NE REQUIERE PAS
 # DE CONNEXION INTERNET).
 
-if(FALSE){
+if(TRUE){
   try({study_visual_report(
     dataset = dataset_tache4, 
     data_dict = data_dict_tache4,to = "output_files/ANNEXE_6/report")})
 }
 
-if(FALSE){
+if(TRUE){
   try({study_visual_report(
     dataset = dataset_tache4, 
     data_dict = data_dict_tache4,to = "output_files/ANNEXE_6/report_BY_QUARTER",
